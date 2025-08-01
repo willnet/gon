@@ -13,6 +13,20 @@ module Rails
   end
 end
 
+ENV.fetch('RABL_GEM', 'rabl').tap do |rabl_gem|
+  remove_gem = nil
+
+  case rabl_gem
+  when 'rabl'
+    remove_gem = 'rabl-rails'
+  when 'rabl-rails'
+    remove_gem = 'rabl'
+  end
+  Gem::Specification.find_by_name(remove_gem).tap do |spec|
+    $LOAD_PATH.delete(spec.lib_dirs_glob)
+  end
+end
+
 require 'gon'
 
 require 'jbuilder'
