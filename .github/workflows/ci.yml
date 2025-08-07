@@ -16,6 +16,8 @@ jobs:
             continue-on-error: true
           - ruby-version: truffleruby
             continue-on-error: true
+          - rabl-gem: rabl-rails
+            continue-on-error: true
 
     steps:
     - uses: actions/checkout@v4
