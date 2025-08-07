@@ -127,7 +127,9 @@ describe Gon::Global do
     end
 
     let(:controller) { ActionController::Base.new }
+    let(:request) { ActionDispatch::Request.new({}) }
     let(:objects) { [1, 2] }
+    before { controller.set_request!(request) }
 
     it 'works fine with rabl' do
       Gon.global.rabl :template => 'spec/test_data/sample.rabl', :controller => controller

@@ -9,7 +9,10 @@ describe Gon do
     end
 
     let(:controller) { ActionController::Base.new }
+    let(:request) { ActionDispatch::Request.new({}) }
     let(:objects) { [1, 2] }
+
+    before { controller.set_request!(request) }
 
     context 'render template with deprecation' do
       it 'still works' do

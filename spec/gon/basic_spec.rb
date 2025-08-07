@@ -296,10 +296,14 @@ describe Gon do
   describe '#check_for_rabl_and_jbuilder' do
 
     let(:controller) { ActionController::Base.new }
+    let(:request) { ActionDispatch::Request.new({}) }
+
+    before { controller.set_request!(request) }
 
     it 'should be able to handle constants array (symbols)' do
       allow(Rails).to receive_message_chain(:application, :routes, :url_helpers, :instance_methods) { [] }
       allow(Gon).to receive(:constants) { Gon.constants }
+
       expect { Gon.rabl :template => 'spec/test_data/sample.rabl', :controller => controller }.not_to raise_error
       expect { Gon.jbuilder :template => 'spec/test_data/sample.json.jbuilder', :controller => controller }.not_to raise_error
     end
