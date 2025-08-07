@@ -296,7 +296,12 @@ describe Gon do
   describe '#check_for_rabl_and_jbuilder' do
 
     let(:controller) { ActionController::Base.new }
-    let(:request) { ActionDispatch::Request.new({}) }
+    let(:request) do
+      ActionDispatch::Request.new({
+        'REQUEST_METHOD' => 'POST',
+        'rack.input' => StringIO.new(""),
+      })
+    end
 
     before { controller.set_request!(request) }
 

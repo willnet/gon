@@ -127,7 +127,12 @@ describe Gon::Global do
     end
 
     let(:controller) { ActionController::Base.new }
-    let(:request) { ActionDispatch::Request.new({}) }
+    let(:request) do
+      ActionDispatch::Request.new({
+        'REQUEST_METHOD' => 'POST',
+        'rack.input' => StringIO.new(""),
+      })
+    end
     let(:objects) { [1, 2] }
     before { controller.set_request!(request) }
 
